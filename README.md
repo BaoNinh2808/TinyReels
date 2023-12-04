@@ -1,6 +1,6 @@
 # TikTok-Compose
 
-TikTok clone app built with Jetpack Compose following latest modern android development trend. Data shown in the app is from local data source, you can replace that with your own server api.
+TikTok clone app built with Jetpack Compose following latest modern android development trend. Data shown in the app is from local data source, you can replace that with your own server API.
 
 <p align="center">
 <img src="screenshots/tiktokcompose_screenshot.jpg"  />
