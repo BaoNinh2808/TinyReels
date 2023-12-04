@@ -1,5 +1,6 @@
 package com.puskal.home
 
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -14,3 +15,5 @@ fun NavGraphBuilder.homeNavGraph(navController: NavController) {
         HomeScreen(navController)
     }
 }
+
+

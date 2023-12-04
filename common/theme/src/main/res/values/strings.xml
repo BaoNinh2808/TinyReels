@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">TikTok Compose</string>
 
-    <string name="home">Home</string>
-    <string name="friends">Friends</string>
-    <string name="inbox">Inbox</string>
-    <string name="profile">Profile</string>
+    <string name="home">Trang chủ</string>
+    <string name="friends">Thông báo</string>
+    <string name="inbox">Tìm liếm</string>
+    <string name="profile">Cá nhân</string>
 
-    <string name="following">Following</string>
-    <string name="for_you">For You</string>
+    <string name="following">Đang theo dõi</string>
+    <string name="for_you">Dành cho bạn</string>
     <string name="see_more">see more</string>
     <string name="hide">hide</string>
 
