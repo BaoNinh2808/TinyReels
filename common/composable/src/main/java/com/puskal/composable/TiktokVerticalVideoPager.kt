@@ -241,7 +241,7 @@ fun SideItems(
             })
 
 
-        Icon(painter = painterResource(id = R.drawable.ic_comment),
+        Icon(painter = painterResource(id = R.drawable.message_icon__3_),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier
@@ -258,7 +258,7 @@ fun SideItems(
 
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_bookmark),
+            painter = painterResource(id = R.drawable.ic_tiny_saved),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier.size(33.dp)
@@ -270,7 +270,7 @@ fun SideItems(
         14.dp.Space()
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_share),
+            painter = painterResource(id = R.drawable.ic_tiny_share),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier
@@ -316,7 +316,7 @@ fun LikeIconButton(
             }, contentAlignment = Alignment.Center
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_heart),
+            painter = painterResource(id = R.drawable.ic_tiny_like),
             contentDescription = null,
             tint = if (isLiked) MaterialTheme.colorScheme.primary else Color.White,
             modifier = Modifier.size(iconSize)
