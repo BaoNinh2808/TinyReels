@@ -1,11 +1,39 @@
 package com.puskal.data.model
-//
-//import com.puskal.core.extension.formattedCount
-//import com.puskal.core.extension.randomUploadDate
-//
-///**
-// * Created by Puskal Khadka on 3/18/2023.
-// */
+
+import java.time.ZonedDateTime
+
+data class VideoModel(
+    val imageId: String,
+    var postId: Array<String?>,
+    val url: String,
+    val uploadedTime: ZonedDateTime,
+    val fileType: FileType,
+    val storageSize: ULong,
+    val length: ULong,
+    val width: UInt,
+    val height: UInt,
+    val resolution: UInt,
+    var isAvatarOf: Array<String?>,
+)
+
+data class ImageModel(
+    val imageId: String,
+    var postId: Array<String?>,
+    val url: String,
+    val uploadedTime: ZonedDateTime,
+    val fileType: FileType,
+    val storageSize: ULong,
+    val width: UInt,
+    val height: UInt,
+    val resolution: UInt,
+    var isAvatarOf: Array<String?>,
+)
+
+enum class FileType {
+    PNG,
+    JPG,
+}
+
 //data class VideoModel(
 //    val videoId: String,
 //    val authorDetails: UserModel,
