@@ -10,6 +10,7 @@ import com.puskal.core.DestinationRoute.INBOX_ROUTE
  */
 fun NavGraphBuilder.inboxNavGraph(navController: NavController) {
     composable(route = INBOX_ROUTE) {
-        InboxScreen(navController)
+//        InboxScreen(navController)
+        CreatePostScreen(navController = navController)
     }
 }

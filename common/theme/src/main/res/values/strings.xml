@@ -4,6 +4,7 @@
     <string name="home">Home</string>
     <string name="friends">Friends</string>
     <string name="inbox">Inbox</string>
+    <string name="create_post">Create</string>
     <string name="profile">Profile</string>
 
     <string name="following">Following</string>
