@@ -30,6 +30,7 @@
     <string name="videos_liked_by">Videos liked by</string>
     <string name="currently_hidden">are currently hidden</string>
     <string name="no_bio_yet">No bio yet</string>
+    <string name="profile_setting>">Profile setting</string>
 
     <!-- search -->
     <string name="find_related_content">Find related content</string>

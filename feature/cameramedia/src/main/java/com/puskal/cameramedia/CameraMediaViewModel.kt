@@ -1,5 +1,6 @@
 package com.puskal.cameramedia
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puskal.core.base.BaseViewModel
 import com.puskal.domain.cameramedia.GetTemplateUseCase
@@ -35,3 +36,37 @@ class CameraMediaViewModel @Inject constructor(
 
 
 }
+
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val getTemplateUseCase: GetTemplateUseCase
+) : ViewModel() {
+    private var userName: String = ""
+    private var bio: String = ""
+    init {
+        getTemplates()
+    }
+
+    fun onUserNameChange(newValue: String) {
+        userName = newValue
+    }
+
+    fun onBioChange(newValue: String) {
+        bio = newValue
+    }
+
+    fun saveUserProfileChanges() {
+        // do nothing
+    }
+
+//    private fun getTemplates() {
+//        viewModelScope.launch {
+//            getTemplateUseCase().collect {
+//                updateState((viewState.value ?: ViewState()).copy(templates = it))
+//            }
+//        }
+//    }
+
+
+}
+

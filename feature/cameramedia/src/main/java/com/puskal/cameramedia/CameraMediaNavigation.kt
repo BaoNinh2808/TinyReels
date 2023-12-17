@@ -10,6 +10,7 @@ import com.puskal.core.DestinationRoute
  */
 fun NavGraphBuilder.cameraMediaNavGraph(navController: NavController) {
     composable(route = DestinationRoute.CAMERA_ROUTE) {
-        CameraMediaScreen(navController)
+//        CameraMediaScreen(navController)
+        ProfileSettingScreen(navController)
     }
 }

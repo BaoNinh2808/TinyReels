@@ -21,8 +21,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.puskal.cameramedia.tabs.CameraScreen
 import com.puskal.cameramedia.tabs.TemplateScreen
+import com.puskal.composable.TopBar
 import com.puskal.core.extension.getCurrentBrightness
 import com.puskal.core.utils.DisableRippleInteractionSource
+import com.puskal.theme.R
 import com.puskal.theme.White
 import kotlinx.coroutines.launch
 
@@ -135,5 +137,76 @@ fun BottomTabLayout(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileSettingScreen(
+    navController: NavController,
+    profileViewModel: ProfileViewModel = hiltViewModel()
+) {
+    var newName by remember { mutableStateOf("") }
+    var newBio by remember { mutableStateOf("") }
 
+    Scaffold(
+        topBar = {
+            TopBar(
+                navIcon = R.drawable.ic_arrow_back,
+                onClickNavIcon = { navController.popBackStack() },
+                title = stringResource(id = R.string.profile_setting)
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .fillMaxWidth()
+        ) {
+            TextField(
+                value = newName,
+                onValueChange = { newValue ->
+                    newName = newValue
+                    profileViewModel.onUserNameChange(newValue)
+                },
+                label =  { Text("Name: ") }
+            )
 
+            Spacer(modifier = Modifier.height(10.dp))
+
+            TextField(
+                value = newBio,
+                onValueChange = { newValue ->
+                    newBio = newValue
+                    profileViewModel.onBioChange(newValue)
+                },
+                label =  { Text("Bio: ") }
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Button(
+                onClick = {
+//                    navController.navigate(Screen.ChangePassword.route)
+                },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                Text("Password")
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Button(
+                onClick = {
+                    profileViewModel.saveUserProfileChanges()
+                    navController.popBackStack()
+                },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                Text("Save changes")
+            }
+
+        }
+    }
+}
