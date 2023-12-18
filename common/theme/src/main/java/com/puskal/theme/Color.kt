@@ -7,6 +7,8 @@ import androidx.compose.ui.graphics.colorspace.WhitePoint
 val PrimaryColor= Color(0xFFFE2C55)
 val GrayMainColor=Color(0XFFF1F1F3)
 val Gray = Color(0XFF8A8B8F) //sub text
+val Green= Color(0XFF226F54)
+val Red= Color(0XFFDA2C38)
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
 val SubTextColor= Color(0XFF8A8B8F)

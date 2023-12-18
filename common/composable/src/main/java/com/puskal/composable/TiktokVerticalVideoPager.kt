@@ -8,6 +8,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.puskal.core.extension.Space
@@ -196,31 +198,7 @@ fun SideItems(
 
     val context = LocalContext.current
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        AsyncImage(
-            model = item.authorDetails.profilePic,
-            contentDescription = null,
-            modifier = Modifier
-                .size(50.dp)
-                .border(
-                    BorderStroke(width = 1.dp, color = White), shape = CircleShape
-                )
-                .clip(shape = CircleShape)
-                .clickable {
-                    onClickUser.invoke(item.authorDetails.userId)
-                },
-            contentScale = ContentScale.Crop
-        )
-        Image(
-            painter = painterResource(id = R.drawable.ic_plus),
-            contentDescription = null,
-            modifier = Modifier
-                .offset(y = (-10).dp)
-                .size(20.dp)
-                .clip(CircleShape)
-                .background(color = MaterialTheme.colorScheme.primary)
-                .padding(5.5.dp),
-            colorFilter = ColorFilter.tint(Color.White)
-        )
+
 
         12.dp.Space()
 
@@ -241,7 +219,7 @@ fun SideItems(
             })
 
 
-        Icon(painter = painterResource(id = R.drawable.ic_comment),
+        Icon(painter = painterResource(id = R.drawable.message_icon__3_),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier
@@ -258,7 +236,7 @@ fun SideItems(
 
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_bookmark),
+            painter = painterResource(id = R.drawable.ic_tiny_saved),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier.size(33.dp)
@@ -270,7 +248,7 @@ fun SideItems(
         14.dp.Space()
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_share),
+            painter = painterResource(id = R.drawable.ic_tiny_share),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier
@@ -316,7 +294,7 @@ fun LikeIconButton(
             }, contentAlignment = Alignment.Center
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_heart),
+            painter = painterResource(id = R.drawable.ic_tiny_like),
             contentDescription = null,
             tint = if (isLiked) MaterialTheme.colorScheme.primary else Color.White,
             modifier = Modifier.size(iconSize)
@@ -336,54 +314,93 @@ fun FooterUi(
     onClickAudio: (VideoModel) -> Unit,
     onClickUser: (userId: Long) -> Unit,
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.Bottom) {
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable {
-            onClickUser(item.authorDetails.userId)
-        }) {
-            Text(
-                text = item.authorDetails.fullName, style = MaterialTheme.typography.bodyMedium
-            )
-            if (showUploadDate) {
+        Column(modifier = modifier, verticalArrangement = Arrangement.Bottom) {
+            Row {
+                AsyncImage(
+                    model = item.authorDetails.profilePic,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(50.dp)
+                        .border(
+                            BorderStroke(width = 1.dp, color = White), shape = CircleShape
+                        )
+                        .clip(shape = CircleShape)
+                        .clickable {
+                            onClickUser.invoke(item.authorDetails.userId)
+                        },
+                    contentScale = ContentScale.Crop
+                )
+                12.dp.Space()
+                //space between profile pic and follow button 4dp
+                4.dp.Space()
+                Button(
+                    onClick = {
+                        //khi nhấn vào sẽ đổi thành "Đã theo dõi" và biến mất
+
+
+                    }, modifier = Modifier, shape = RoundedCornerShape(2.dp), colors = ButtonDefaults.buttonColors(
+                        backgroundColor = Red,
+                        contentColor = Color.White,
+                        //bo góc tròn +
+                    )
+                ) {
+                    Text(text = stringResource(id = R.string.follow))
+                }
+            }
+            5.dp.Space()
+
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable {
+                onClickUser(item.authorDetails.userId)
+            }) {
                 Text(
-                    text = " . ${item.createdAt} ago",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = Color.White.copy(alpha = 0.6f)
+                    text = item.authorDetails.fullName,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                if (showUploadDate) {
+                    Text(
+                        text = " . ${item.createdAt} ago",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = Color.White.copy(alpha = 0.6f)
+                    )
+                }
+            }
+            5.dp.Space()
+            Text(
+                text = item.description,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.fillMaxWidth(0.85f)
+            )
+            10.dp.Space()
+            val audioInfo: String = item.audioModel?.run {
+                "Original sound - ${audioAuthor.uniqueUserName} - ${audioAuthor.fullName}"
+            }
+                ?: item.run { "Original sound - ${item.authorDetails.uniqueUserName} - ${item.authorDetails.fullName}" }
+
+
+            //button follow
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.clickable {
+                    onClickAudio(item)
+                }
+
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_music_note),
+                    contentDescription = null,
+                    tint = Color.Unspecified,
+                    modifier = Modifier.size(12.dp)
+                )
+                Text(
+                    text = audioInfo,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .basicMarquee()
                 )
             }
         }
-        5.dp.Space()
-        Text(
-            text = item.description,
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.fillMaxWidth(0.85f)
-        )
-        10.dp.Space()
-        val audioInfo: String = item.audioModel?.run {
-            "Original sound - ${audioAuthor.uniqueUserName} - ${audioAuthor.fullName}"
-        }
-            ?: item.run { "Original sound - ${item.authorDetails.uniqueUserName} - ${item.authorDetails.fullName}" }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.clickable {
-                onClickAudio(item)
-            }
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_music_note),
-                contentDescription = null,
-                tint = Color.Unspecified,
-                modifier = Modifier.size(12.dp)
-            )
-            Text(
-                text = audioInfo,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .basicMarquee()
-            )
-        }
-    }
 }
 
 

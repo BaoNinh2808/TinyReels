@@ -203,12 +203,16 @@ fun ColumnScope.ProfileDetails(creatorProfile: UserModel?) {
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Button(
-            onClick = { }, modifier = Modifier
+        Box(
+            modifier = Modifier
+                .height(40.dp)
                 .width(158.dp)
-                .height(42.dp), shape = RoundedCornerShape(2.dp)
+                .border(
+                    width = 3.dp, shape = RoundedCornerShape(2.dp), color = Red
+                ),
+            contentAlignment = Alignment.Center
         ) {
-            Text(text = stringResource(id = R.string.follow))
+            Text(text = stringResource(id = R.string.follow),style = MaterialTheme.typography.bodyMedium)
         }
         creatorProfile?.pinSocialMedia?.let {
             Box(
@@ -240,14 +244,14 @@ fun ColumnScope.ProfileDetails(creatorProfile: UserModel?) {
         }
         Box(
             modifier = Modifier
-                .fillMaxHeight()
+                .height(40.dp)
                 .width(40.dp)
                 .border(
-                    width = 1.dp, shape = RoundedCornerShape(2.dp), color = Gray.copy(alpha = 0.2f)
+                    width = 3.dp, shape = RoundedCornerShape(2.dp), color = Green
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Icon(painter = painterResource(id = R.drawable.ic_down_more), contentDescription = null)
+            Icon(painter = painterResource(id = R.drawable.ic_share_profile), contentDescription = null)
         }
     }
 
